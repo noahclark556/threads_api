@@ -99,3 +99,7 @@ print(api.posts)  # return posts in array format
 print(api.links)  # return links, also includes mentions
 
 ```
+
+# Other Notes
+___
+It should be mentioned that if the Selenium driver fails to pull profile data, you can do a few things to fix it. You can either increase the pageLoadWaitTime variable or edit the 'tag_references.py' and ensure they point to the correct paths.
