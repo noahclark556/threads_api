@@ -70,14 +70,19 @@ class ThreadsApi:
         return request
 
     def startAi(self, user_profile):
-        request = self.getType(user_profile)
-        response = openai.ChatCompletion.create(
-            model=self.gptModel,
-            messages=request
-        )
-        if self.aiRequestType == 'osint.links' or self.aiRequestType == 'osint.mentions':
-            return literal_eval(response.choices[0].message.content)
-        return response.choices[0].message.content
+        if user_profile.name != 'N/A' and user_profile.bio != 'N/A':
+            request = self.getType(user_profile)
+            response = openai.ChatCompletion.create(
+                model=self.gptModel,
+                messages=request
+            )
+            if self.aiRequestType == 'osint.links' or self.aiRequestType == 'osint.mentions':
+                return literal_eval(response.choices[0].message.content)
+            return response.choices[0].message.content
+        else:
+            if self.statusPrintingEnabled:
+                print("Unable to locate profile information. Try increasing the pageLoadWaitTime.")
+            return "N/A"
 
     def parsePageData(self, soup):
         # dom = etree.HTML(str(soup))
@@ -91,6 +96,10 @@ class ThreadsApi:
             self.bio = soup.select_one(TagReferences().bio).text
         except Exception:
             self.bio = 'N/A'
+
+        if self.name == 'N/A' and self.bio == 'N/A':
+            if self.statusPrintingEnabled:
+                print("Unable to locate profile information. Try increasing the pageLoadWaitTime.")
 
         # try:
         posts = soup.select(TagReferences().posts)
@@ -129,7 +138,7 @@ class ThreadsApi:
         os.system('clear')
         if self.statusPrintingEnabled:
             print("Donations to development are greatly appreciated and are very helpful, please visit https://qwertycode.org to donate.\n")
-            print("To disable this message and all others, set statusPrintingEnabled=False in the inital API instance\n\n")
+            print("To disable this message and all others, set statusPrintingEnabled=False in the inital API instance. This will disable some error messages. \n\n")
         if self.statusPrintingEnabled:
             print("Please wait, executing API functions..")
         soup = self.getSoup(f"https://www.threads.net/@{self.profile}")
