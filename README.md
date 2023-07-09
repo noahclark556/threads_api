@@ -24,8 +24,20 @@ pip install beautifulsoup4
 pip install selenium
 pip install openai
 ```
-
 In order to use AI functions, you will need to get an OpenAI API Key as well as an OpenAI organization identifier. Although AI is not a requirement to use this package.
+
+# Change Notes
+___
+
+### July 9, 2023 @ 6:30 PM (update)
+Update pushed to github, can now retrieve the numeric user_id variable from selected profiles using 'api.userId'
+
+### July 9, 2023 @ 10:00 AM (release)
+Package published to github with described capability
+
+### July 8, 2023 (prep)
+Initial package finalized and prepped for release.
+
 # Usage
 ___
 Step 1. Clone this repository and place the 'threads_api' package in your python project.
@@ -65,6 +77,8 @@ api.start()
 Step 6. Retrieve and manipulate the API data:
 ```python
 print(api.aiResponse)  # return AI request response
+
+print(api.userId)  # return numeric user_id of account
 
 print(api.bio)  # return users bio
 

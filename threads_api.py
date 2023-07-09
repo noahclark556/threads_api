@@ -32,6 +32,7 @@ class ThreadsApi:
         self.links = []
         self.bio = ''
         self.name = ''
+        self.userId = ''
         self.aiResponse = ''
 
         openai.organization = self.openAIOrg
@@ -84,6 +85,19 @@ class ThreadsApi:
                 print("Unable to locate profile information. Try increasing the pageLoadWaitTime.")
             return "N/A"
 
+    def getUserId(self, soup):
+        soupStr = str(soup)
+        startIndex = soupStr.find('"user_id"') + 11
+        i = 0
+        newId = ""
+        while i < 30:
+            if soupStr[startIndex + i].isdigit():
+                newId += soupStr[startIndex + i]
+            else:
+                break
+            i += 1
+        return newId
+
     def parsePageData(self, soup):
         # dom = etree.HTML(str(soup))
         # self.name = dom.xpath(TagReferences().name)[0].text
@@ -96,6 +110,11 @@ class ThreadsApi:
             self.bio = soup.select_one(TagReferences().bio).text
         except Exception:
             self.bio = 'N/A'
+
+        try:
+            self.userId = self.getUserId(soup)
+        except Exception:
+            self.userId = 'N/A'
 
         if self.name == 'N/A' and self.bio == 'N/A':
             if self.statusPrintingEnabled:
