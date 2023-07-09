@@ -11,6 +11,8 @@ This META Threads API allows the developer to easily pull and manipulate profile
 
 The API also includes AI capability that allows the developer to parse a profile into very readable OSINT information as well as pull out pertinent information from an infinite number of posts.
 
+A demo video is located here: https://youtu.be/55a9mEaP-ao
+
 # Requirements
 ___
 
