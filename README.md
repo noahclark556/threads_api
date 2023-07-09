@@ -29,14 +29,18 @@ In order to use AI functions, you will need to get an OpenAI API Key as well as 
 # Change Notes
 ___
 
+### July 9, 2023 @ 6:45 PM (update)
+- Update pushed to github, developers can now retrieve the url of the account owners instagram account using 'api.linkedInstagram'
+- Fixed 'api.name' issues. Only the name is now returned, rather than the entire title
+
 ### July 9, 2023 @ 6:30 PM (update)
-Update pushed to github, can now retrieve the numeric user_id variable from selected profiles using 'api.userId'
+- Update pushed to github, developers can now retrieve the numeric user_id variable from selected profiles using 'api.userId'
 
 ### July 9, 2023 @ 10:00 AM (release)
-Package published to github with described capability
+- Package published to github with described capability
 
 ### July 8, 2023 (prep)
-Initial package finalized and prepped for release.
+- Initial package finalized and prepped for release
 
 # Usage
 ___
@@ -87,6 +91,8 @@ print(api.name)  # return users name
 print(api.posts)  # return posts in array format
 
 print(api.links)  # return links, also includes mentions
+
+print(api.linkedInstagram)  # return linked instagram account url
 ```
 
 Final product should look like this:

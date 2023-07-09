@@ -33,6 +33,8 @@ class ThreadsApi:
         self.bio = ''
         self.name = ''
         self.userId = ''
+        self.followers = ''
+        self.linkedInstagram = ''
         self.aiResponse = ''
 
         openai.organization = self.openAIOrg
@@ -110,6 +112,16 @@ class ThreadsApi:
             self.bio = soup.select_one(TagReferences().bio).text
         except Exception:
             self.bio = 'N/A'
+
+        try:
+            self.followers = soup.select_one(TagReferences().followers).text
+        except Exception:
+            self.followers = 'N/A'
+
+        try:
+            self.linkedInstagram = soup.select_one(TagReferences().linkedInstagram)['href']
+        except Exception:
+            self.linkedInstagram = 'N/A'
 
         try:
             self.userId = self.getUserId(soup)
