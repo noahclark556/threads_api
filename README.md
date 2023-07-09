@@ -16,6 +16,13 @@ ___
 
 'Selenium' is used in this package. Please ensure you have Chrome installed, if you do not want to install Chrome, you can adjust the API code to use a web driver executable. The code to adjust would be located in 'threads_api.py' under the getSoup function.
 
+Please execute the following pip installs:
+```python
+pip install beautifulsoup4
+pip install selenium
+pip install openai
+```
+
 In order to use AI functions, you will need to get an OpenAI API Key as well as an OpenAI organization identifier. Although AI is not a requirement to use this package.
 # Usage
 ___
