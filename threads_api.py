@@ -45,7 +45,7 @@ class ThreadsApi:
         if self.aiRequestType == 'osint.character_prompt':
             request = [
                 {"role": "system",
-                 "content": "You are going to receive some information from a Meta Threads profile. The posts will be shown to you in an array. Using this information, build a character prompt that best describes the individual who owns this profile. Only return the character prompt, do not include anything else such as intros or leading sentances."},
+                 "content": "You are going to receive some information from a Meta Threads profile. The posts will be shown to you in an array. Using this information, build a character prompt that best describes the individual who owns this profile. Only return the character prompt, do not include anything else such as intros or leading sentences."},
                 {"role": "user",
                  "content": f"Users name: {user_profile.name}. Users bio {user_profile.bio}. Users posts: {user_profile.posts}"}
             ]
