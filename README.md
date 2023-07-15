@@ -29,6 +29,10 @@ In order to use AI functions, you will need to get an OpenAI API Key as well as 
 # Change Notes
 ___
 
+### July 15, 2023 @ 5:00 PM (update)
+- AI credentials are no longer a required parameter. Use api.openAIOrg="YOUR-ORG" and api.openAIKey="YOUR_KEY" to enable AI capability
+- These values are required to use AI. An error will be returned if they are not set and api.usingAI is set to True
+
 ### July 15, 2023 @ 4:45 PM (update)
 - api.replies() has been added, retrieve all replies from account
 - api.replyLinks() has been added, retrieve all links from all replies on account
@@ -57,13 +61,17 @@ from threads_api import ThreadsApi
 
 Step 3. Initialize the API:
 ```python
-api = ThreadsApi('ANY-THREADS-USERNAME', 'OPENAI-ORGANIZATION', 'OPENAI-API-KEY')
+api = ThreadsApi('ANY-THREADS-USERNAME')
 ```
 _NOTE: If you are not using openAI, fill the openAI parameters with something random_
 
 Step 4. Set the following optional parameters:
 ```python
 api.aiRequestType = 'osint.profile'  # osint.character_prompt || osint.profile || osint.links || osint.mentions
+
+api.openAIOrg = 'OPENAI-ORGANIZATION' # your OpenAI Api organization identifier
+
+api.openAIKey = 'OPENAI-API-KEY' # your OpenAI Api Key 
 
 api.gptModel = 'gpt-4'  # 'gpt-4' or 'gpt-3.5-turbo' recommended
 

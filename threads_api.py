@@ -18,9 +18,9 @@ import openai
 
 class ThreadsApi:
 
-    def __init__(self, userId, openAIOrg, openAIKey, statusPrintingEnabled=True):
-        self.openAIOrg = openAIOrg
-        self.openAIKey = openAIKey
+    def __init__(self, userId, statusPrintingEnabled=True):
+        self.openAIOrg = ""
+        self.openAIKey = ""
         self.statusPrintingEnabled = statusPrintingEnabled
         self.aiRequestType = 'osint.character_prompt'
         self.maxPosts = 10
@@ -38,9 +38,6 @@ class ThreadsApi:
         self.aiResponse = ''
         self.replyLinks = []
         self.replies = []
-
-        openai.organization = self.openAIOrg
-        openai.api_key = self.openAIKey
 
     def getType(self, user_profile):
         request = []
@@ -75,19 +72,24 @@ class ThreadsApi:
         return request
 
     def startAi(self, user_profile):
-        if user_profile.name != 'N/A' and user_profile.bio != 'N/A':
-            request = self.getType(user_profile)
-            response = openai.ChatCompletion.create(
-                model=self.gptModel,
-                messages=request
-            )
-            if self.aiRequestType == 'osint.links' or self.aiRequestType == 'osint.mentions':
-                return literal_eval(response.choices[0].message.content)
-            return response.choices[0].message.content
+        if(len(self.openAIKey) > 0 and len(self.openAIOrg) > 0):
+            openai.organization = self.openAIOrg
+            openai.api_key = self.openAIKey
+            if user_profile.name != 'N/A' and user_profile.bio != 'N/A':
+                request = self.getType(user_profile)
+                response = openai.ChatCompletion.create(
+                    model=self.gptModel,
+                    messages=request
+                )
+                if self.aiRequestType == 'osint.links' or self.aiRequestType == 'osint.mentions':
+                    return literal_eval(response.choices[0].message.content)
+                return response.choices[0].message.content
+            else:
+                if self.statusPrintingEnabled:
+                    print("Unable to locate profile information. Try increasing the pageLoadWaitTime.")
+                return "N/A"
         else:
-            if self.statusPrintingEnabled:
-                print("Unable to locate profile information. Try increasing the pageLoadWaitTime.")
-            return "N/A"
+            return "In order to use AI, please set your OpenAI Api Key and OpenAI Organization using api.openAIOrg=YOUR_ORG and api.openAIKey=YOUR_KEY. Or set api.usingAI=False to skip AI entirely."
 
     def getUserId(self, soup):
         soupStr = str(soup)
