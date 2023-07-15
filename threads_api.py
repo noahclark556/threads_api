@@ -36,6 +36,8 @@ class ThreadsApi:
         self.followers = ''
         self.linkedInstagram = ''
         self.aiResponse = ''
+        self.replyLinks = []
+        self.replies = []
 
         openai.organization = self.openAIOrg
         openai.api_key = self.openAIKey
@@ -45,7 +47,7 @@ class ThreadsApi:
         if self.aiRequestType == 'osint.character_prompt':
             request = [
                 {"role": "system",
-                 "content": "You are going to receive some information from a Meta Threads profile. The posts will be shown to you in an array. Using this information, build a character prompt that best describes the individual who owns this profile. Only return the character prompt, do not include anything else such as intros or leading sentences."},
+                 "content": "You are going to receive some information from a Meta Threads profile. The posts will be shown to you in an array. Using this information, build a character prompt that best describes the individual who owns this profile. Only return the character prompt, do not include anything else such as intros or leading sentances."},
                 {"role": "user",
                  "content": f"Users name: {user_profile.name}. Users bio {user_profile.bio}. Users posts: {user_profile.posts}"}
             ]
@@ -100,6 +102,21 @@ class ThreadsApi:
             i += 1
         return newId
 
+    def getRepliesAndLinks(self, url):
+        soup = self.getSoup(url)
+        replySelect = soup.select(TagReferences().replyText)
+        replies = []
+        for i in replySelect:
+            replies.append(i.text)
+
+        linksSelect = soup.select(TagReferences().replyLinks)
+        links = []
+        for i in linksSelect:
+            links.append(i.text)
+
+        self.replyLinks = links
+        self.replies = replies
+
     def parsePageData(self, soup):
         # dom = etree.HTML(str(soup))
         # self.name = dom.xpath(TagReferences().name)[0].text
@@ -135,6 +152,7 @@ class ThreadsApi:
         # try:
         posts = soup.select(TagReferences().posts)
         links = soup.select(TagReferences().links)
+
         # except Exception:
         #     posts = ['None']
 
@@ -173,6 +191,7 @@ class ThreadsApi:
         if self.statusPrintingEnabled:
             print("Please wait, executing API functions..")
         soup = self.getSoup(f"https://www.threads.net/@{self.profile}")
+        self.getRepliesAndLinks(f"https://www.threads.net/@{self.profile}/replies")
         user_profile = self.parsePageData(soup)
         if self.usingAI:
             self.aiResponse = self.startAi(user_profile)

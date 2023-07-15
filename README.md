@@ -29,6 +29,10 @@ In order to use AI functions, you will need to get an OpenAI API Key as well as 
 # Change Notes
 ___
 
+### July 15, 2023 @ 4:45 PM (update)
+- api.replies() has been added, retrieve all replies from account
+- api.replyLinks() has been added, retrieve all links from all replies on account
+
 ### July 9, 2023 @ 6:45 PM (update)
 - Update pushed to github, developers can now retrieve the url of the account owners instagram account using 'api.linkedInstagram'
 - Fixed 'api.name' issues. Only the name is now returned, rather than the entire title
@@ -93,6 +97,12 @@ print(api.posts)  # return posts in array format
 print(api.links)  # return links, also includes mentions
 
 print(api.linkedInstagram)  # return linked instagram account url
+
+print(api.replies)  # return all replies
+
+print(api.replyLinks)  # return all links contained in replies
+
+print(api.followers)  # return follower count
 ```
 
 Final product should look like this:
@@ -127,6 +137,13 @@ print(api.posts)  # return posts in array format
 
 print(api.links)  # return links, also includes mentions
 
+print(api.linkedInstagram)  # return linked instagram account url
+
+print(api.replies)  # return all replies
+
+print(api.replyLinks)  # return all links contained in replies
+
+print(api.followers)  # return follower count
 ```
 
 # Other Notes

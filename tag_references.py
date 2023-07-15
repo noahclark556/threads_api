@@ -7,4 +7,6 @@ class TagReferences:
         self.links = ".x1npkx4u div .x1a6qonq p a"
         self.followers = ".x6s0dn4 div div div span span"
         self.linkedInstagram = ".x6s0dn4 .x6s0dn4 div a"
+        self.replyText = ".x78zum5 .x1ypdohk div .x1npkx4u div .x1a6qonq p span"
+        self.replyLinks = ".x78zum5 .x1ypdohk div .x1npkx4u div .x1a6qonq p a"
         # self.bio = '//*[@id="mount_0_0_XL"]/div/div/div[2]/div/div/div/div/div[1]/div[2]/div[1]/div[2]/span/text()'
