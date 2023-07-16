@@ -63,9 +63,9 @@ Step 3. Initialize the API:
 ```python
 api = ThreadsApi('ANY-THREADS-USERNAME')
 ```
-_NOTE: If you are not using openAI, fill the openAI parameters with something random_
 
 Step 4. Set the following optional parameters:
+_NOTE: If you are not using openAI, disregard the openAI parameters and set api.usingAI=False_
 ```python
 api.aiRequestType = 'osint.profile'  # osint.character_prompt || osint.profile || osint.links || osint.mentions
 
