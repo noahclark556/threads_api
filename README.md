@@ -1,4 +1,5 @@
 # META Threads API
+# NOTE: This package does not work anymore. I do not currently have the time to fix it but will soon. Thanks!
 ## Developed by Noah Clark
 ### https://qwertycode.org
 ### Donations at the above URL are very helpful 
