@@ -1,9 +1,7 @@
 # META Threads API
-# NOTE: This package does not work anymore. I do not currently have the time to fix it but will soon. Thanks!
+# NOTE: This repo is outdated and does not work reliably, I recommend using the actual Threads API.
 ## Developed by Noah Clark
-### https://qwertycode.org
-### Donations at the above URL are very helpful 
-### ! This API and its Development/Developer has no affiliation with META in any way !
+### ! This API has no affiliation with META in any way.
 
 # Introduction
 ___
